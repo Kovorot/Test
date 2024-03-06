@@ -29,6 +29,7 @@ public class FileManager {
      * Название последнего сохраненного и открытого юзером запроса.
      */
     private String lastQueryName;
+    private String userSavesDirectory;
 
 
     public void saveQuery(Query query) {
@@ -44,7 +45,6 @@ public class FileManager {
         }
         userInfoPath = appPath + "/userInfo.txt";
         String[] userData = loadUserSavesData();
-        String userSavesDirectory;
 
         if (userData != null) {
             userSavesDirectory = userData[1];
@@ -53,6 +53,10 @@ public class FileManager {
     }
 
     protected UserData loadUserData() {
+
+        if (new File(userSavesDirectory + "/" + lastQueryName + ".dat").exists()) {
+
+        }
         return null;
     }
 

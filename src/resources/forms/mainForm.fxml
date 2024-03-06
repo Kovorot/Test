@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="514.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.controller.MainController">
+   <children>
+      <TabPane layoutX="39.0" layoutY="38.0" prefHeight="140.0" prefWidth="734.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Главная" />
+          <Tab text="Преобразование" />
+            <Tab text="Добавление столбца">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Просмотр">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Separator layoutY="139.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <ToolBar layoutX="14.0" layoutY="346.0" prefHeight="20.0" prefWidth="300.0" style="-fx-background-color: #217246FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0">
+         <items>
+            <Label text="Столбцов: " textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Строк: " textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </items>
+      </ToolBar>
+      <ToolBar layoutX="378.0" layoutY="346.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="300.0" style="-fx-background-color: #217246FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <items>
+            <Label text="Предварительный просмотр загружен в " textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </items>
+      </ToolBar>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="40.0" layoutY="132.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="139.0">
+         <content>
+            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
+      <AnchorPane layoutX="514.0" layoutY="130.0" prefHeight="200.0" prefWidth="350.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="139.0">
+         <children>
+            <Label layoutX="28.0" layoutY="24.0" text="Параметры запроса" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="W_RESIZE" />
+         </cursor>
+      </AnchorPane>
+      <MenuButton layoutX="-29.0" layoutY="207.0" mnemonicParsing="false" popupSide="RIGHT" rotate="-90.0" text="Запрос" AnchorPane.leftAnchor="-16.0" AnchorPane.topAnchor="170.0">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Папка сохраненных запросов" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+          <MenuItem mnemonicParsing="false" onAction="#createQuery" text="Сооздать новый" />
+          <MenuItem mnemonicParsing="false" text="Загрузить существующий" />
+        </items>
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </MenuButton>
+   </children>
+</AnchorPane>

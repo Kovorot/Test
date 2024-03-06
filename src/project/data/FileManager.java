@@ -4,7 +4,6 @@ import project.dialog.Message;
 
 import java.io.*;
 import java.net.URLDecoder;
-import java.util.Optional;
 
 /**
  * Менеджер файлов, представляющий собой класс, выполняющий всю input-output работу для сохранения и загрузки данных.
@@ -54,7 +53,7 @@ public class FileManager {
     }
 
     protected UserData loadUserData() {
-
+        return null;
     }
 
     //region private

@@ -1,6 +1,8 @@
 package project.data;
 
-public class Query {
+import java.io.Serializable;
+
+public class Query implements Serializable {
     private boolean modified;
 
     public boolean isModified() {

@@ -29,6 +29,9 @@ public class FileManager {
      * Название последнего сохраненного и открытого юзером запроса.
      */
     private String lastQueryName;
+    /**
+     * Путь к папке с сохраненными запросами юзера.
+     */
     private String userSavesDirectory;
 
 
@@ -56,7 +59,6 @@ public class FileManager {
 
         if (new File(userSavesDirectory + "/" + lastQueryName + ".dat").exists()) {
 
-
         }
         return null;
     }
@@ -71,7 +73,7 @@ public class FileManager {
         File usersInfo = new File(userInfoPath);
 
         if (usersInfo.exists()) {
-            return findUserData();
+            return findUserInfoData();
         } else {
             try {
                 if (!usersInfo.createNewFile()) {
@@ -88,7 +90,7 @@ public class FileManager {
      * Ищет юзера и директорию с сохраненными запросами, указанную им в файле с данными о всех юзерах.
      * @Return Массив данных юзера.
      */
-    private String[] findUserData() {
+    private String[] findUserInfoData() {
 
         try (Reader reader = new FileReader(userInfoPath);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
@@ -105,5 +107,17 @@ public class FileManager {
         return null;
     }
 
+    /**
+     * Проверяет корректность пути к папке с сохраненными запросами юзера. Если путь будет некорректный, метод удалит его из сохраненных путей.
+     * Это необходимо для того, чтобы юзер не мог засрать общий диск и хранил свои запросы только у себя на диске C.
+     */
+    private void checkRootLegality() {
+
+        if (userSavesDirectory != null && !userSavesDirectory.startsWith("C:")) {
+            message.warn("В пути к папке с сохраненными запросами обнаружена ошибка.\n" +
+                    "Данная папка может находиться только на диске C. Текущий путь будет удален.");
+            userSavesDirectory = null;
+        }
+    }
     //endregion
 }

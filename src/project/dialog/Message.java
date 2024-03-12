@@ -14,8 +14,14 @@ import java.util.Optional;
  * Класс для диалогового взаимодействия с пользователем.
  */
 public class Message {
-    private static Message instance; //Единственный экземпляр класса
+    //region fields
+    /**
+     * Единственный экземпляр класса.
+     */
+    private static Message instance;
+    //endregion
 
+    //region public
     /**
      * Возвращает единственный экземпляр класса, если его нет, создает новый.
      * @return Единственный экземпляр класса.
@@ -80,6 +86,24 @@ public class Message {
     }
 
     /**
+     * Выводит сообщение с предупреждением для пользователя.
+     * @param text Текст сообщения.
+     */
+    public void warn(String text) {
+        Alert alert = createAlert(Alert.AlertType.WARNING, text);
+        alert.showAndWait();
+    }
+
+    /**
+     * Выводит информирующее сообщение юзеру.
+     * @param text Текст сообщения.
+     */
+    public void info(String text) {
+        Alert alert = createAlert(Alert.AlertType.INFORMATION, text);
+        alert.showAndWait();
+    }
+
+    /**
      * Выводит сообщение с вопросом о сохранении внесенных изменений.
      * @return Ответ юзера.
      */
@@ -100,11 +124,7 @@ public class Message {
         }
         return Response.CLOSE;
     }
-
-    public void info(String text) {
-        Alert alert = createAlert(Alert.AlertType.INFORMATION, text);
-        alert.showAndWait();
-    }
+    //endregion
 
     //region private
     private Message() {}

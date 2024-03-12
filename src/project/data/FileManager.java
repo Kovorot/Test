@@ -34,6 +34,10 @@ public class FileManager {
      * Путь к папке с сохраненными запросами юзера.
      */
     private String userSavesDirectory;
+    /**
+     * Имя пользователя в системе.
+     */
+    private String username;
     //endregion
 
     //region public
@@ -41,16 +45,14 @@ public class FileManager {
 
     }
 
-    public void changeSavesDirectory(String path) {
-
+    public void setSavesDirectory(String path) {
+        String[] parts = findUserInfoData();
+        BufferedWriter br;
+        // TODO: 12.03.2024 Заменить текстовый файл на xml
     }
 
     public void removeSavesDirectory() {
-
-    }
-
-    public void setSavesDirectory() {
-
+        setSavesDirectory("");
     }
     //endregion
 
@@ -63,6 +65,7 @@ public class FileManager {
             message.showUnprocessedException(e);
         }
         userInfoPath = appPath + "/userInfo.txt";
+        username = System.getProperty("user.name");
         String[] userData = loadUserSavesData();
 
         if (userData != null) {
@@ -112,12 +115,11 @@ public class FileManager {
 
         try (Reader reader = new FileReader(userInfoPath);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
-            String userName = System.getProperty("user.name");
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
                 String[] parts = line.split(delimiter);
-                if (parts[0].equals(userName)) return parts;
+                if (parts[0].equals(username)) return parts;
             }
         } catch (IOException e) {
             message.showUnprocessedException(e);

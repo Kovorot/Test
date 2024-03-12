@@ -1,31 +1,60 @@
 package project.data;
 
-import project.exception.InitializationException;
+import java.util.Optional;
 
 public class ProcessData {
-    private static ProcessData instance;
+    //region fields
+    /**
+     * Единственный и неповторимый экземпляр класса.
+     */
+    private static final ProcessData instance;
+    /**
+     * Объект менеджера файлов.
+     */
     private final FileManager fileManager;
+    /**
+     * Данные пользователя.
+     */
     private final UserData userData;
+    //endregion
 
-    public static void init() {
+    static {
         instance = new ProcessData();
     }
 
+    //region public
+    /**
+     * Возвращает единственный экземпляр данного класса.
+     * @return Возвращает экземпляр.
+     */
     public static ProcessData getInstance() {
-        if (instance == null) throw new InitializationException("Объект ProcessData не был инициализирован");
         return instance;
     }
 
-    public Query getCurrentQuery() {
-        return userData.getActiveQuery();
+    /**
+     * Возвращает текущий запрос юзера в обертке {@link Optional}, так как запрос может отсутствовать.
+     * @return {@link Optional} обертка запроса юзера.
+     */
+    public Optional<Query> getCurrentQuery() {
+        return Optional.ofNullable(userData.getActiveQuery());
     }
 
+    /**
+     * Передает менеджер файлов, который доступен только из этого класса.
+     * @return Единственный экземпляр класса {@link FileManager}.
+     */
     public FileManager getFileManager() {
         return fileManager;
     }
+    //endregion
 
+    //region private
+    /**
+     * Единственный конструктор данного класса, инициализирующий так же основные компоненты рабочего процесса программы.
+     */
     private ProcessData() {
         fileManager = new FileManager();
         userData = fileManager.loadUserData();
     }
+    //endregion
 }

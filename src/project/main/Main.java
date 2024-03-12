@@ -9,6 +9,8 @@ import project.data.ProcessData;
 import project.data.Query;
 import project.dialog.Message;
 
+import java.util.Optional;
+
 public class Main extends Application {
 
     /**
@@ -27,21 +29,20 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setOnCloseRequest(event -> {
             ProcessData processData = ProcessData.getInstance();
-            Query query = processData.getCurrentQuery();
+            Optional<Query> query = processData.getCurrentQuery();
 
-            if (query != null && query.isModified()) {
+            if (query.isPresent() && query.get().isModified()) {
                 event.consume();
 
                 switch (Message.getInstance().closeRequest()) {
                     case SAVE:
-                        processData.getFileManager().saveQuery(query);
+                        processData.getFileManager().saveQuery(query.get());
                     case REFUSE:
                         Platform.exit();
                     default:
                 }
             }
         });
-        ProcessData.init();
         primaryStage.show();
     }
 }

@@ -9,6 +9,7 @@ import java.net.URLDecoder;
  * Менеджер файлов, представляющий собой класс, выполняющий всю input-output работу для сохранения и загрузки данных.
  */
 public class FileManager {
+    //region fields
     /**
      * Объект класса {@link Message}, для взаимодействия с юзером.
      */
@@ -33,12 +34,27 @@ public class FileManager {
      * Путь к папке с сохраненными запросами юзера.
      */
     private String userSavesDirectory;
+    //endregion
 
-
+    //region public
     public void saveQuery(Query query) {
 
     }
 
+    public void changeSavesDirectory(String path) {
+
+    }
+
+    public void removeSavesDirectory() {
+
+    }
+
+    public void setSavesDirectory() {
+
+    }
+    //endregion
+
+    //region protected
     protected FileManager() {
         message = Message.getInstance();
         try {
@@ -53,6 +69,7 @@ public class FileManager {
             userSavesDirectory = userData[1];
             lastQueryName = userData[2];
         }
+        checkRootLegality();
     }
 
     protected UserData loadUserData() {
@@ -62,6 +79,7 @@ public class FileManager {
         }
         return null;
     }
+    //endregion
 
     //region private
 
